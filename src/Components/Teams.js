@@ -1,8 +1,17 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import getPlayers from '../api/data/playerData';
 
 export default function Teams() {
-  getPlayers().then(console.warn);
+  useEffect(() => {
+    let isMounted = true;
+    getPlayers().then((response) => {
+      if (isMounted) console.warn(response);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div>
       <div>
