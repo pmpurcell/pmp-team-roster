@@ -1,10 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import getPlayers from '../api/data/playerData';
 
-export default function Teams(userId) {
-  console.warn(userId);
-  getPlayers(userId).then(console.warn);
+export default function Teams() {
+  getPlayers().then(console.warn);
   return (
     <div>
       <div>
@@ -20,7 +18,3 @@ export default function Teams(userId) {
     </div>
   );
 }
-
-// Teams.propTypes = {
-//   userId: PropTypes.string.isRequired,
-// };

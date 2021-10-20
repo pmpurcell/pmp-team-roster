@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import New from '../Components/New';
 import Teams from '../Components/Teams';
 
-export default function Routes(userId) {
+export default function Routes() {
   return (
     <div>
       <Switch>
-        <Route exact path="/teams" component={() => <Teams userId={userId} />} />
+        <Route exact path="/teams" component={Teams} />
         <Route exact path="/new" component={New} />
       </Switch>
     </div>
@@ -16,5 +16,5 @@ export default function Routes(userId) {
 }
 
 Teams.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.objectOf(PropTypes.string).isRequired,
 };

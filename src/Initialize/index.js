@@ -36,6 +36,7 @@ function Initialize() {
             <div>
               <Nav />
               <Routes userId={user.uid} />
+              <h1>{user.uid}</h1>
             </div>
           </div>
         </>
