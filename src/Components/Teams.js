@@ -1,6 +1,8 @@
 import React from 'react';
+import getPlayers from '../api/data/playerData';
 
 export default function Teams() {
+  getPlayers().then(console.warn);
   return (
     <div>
       <div>

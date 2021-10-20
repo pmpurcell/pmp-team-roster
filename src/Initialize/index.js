@@ -19,6 +19,7 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
+        console.warn(user.uid);
         history.push('/teams');
       } else if (user || user === null) {
         setUser(false);
@@ -34,7 +35,8 @@ function Initialize() {
             <h2>INSIDE APP COMPONENT</h2>
             <div>
               <Nav />
-              <Routes />
+              <Routes userId={user.uid} />
+              <h1>{user.uid}</h1>
             </div>
           </div>
         </>
