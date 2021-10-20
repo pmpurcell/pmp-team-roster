@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
+import { useHistory } from 'react-router-dom';
 import SignIn from '../views/SignIn';
 import Nav from '../Components/Nav';
+import Routes from '../routes';
 
 function Initialize() {
   const [user, setUser] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -16,6 +19,7 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
+        history.push('/teams');
       } else if (user || user === null) {
         setUser(false);
       }
@@ -30,6 +34,7 @@ function Initialize() {
             <h2>INSIDE APP COMPONENT</h2>
             <div>
               <Nav />
+              <Routes />
             </div>
           </div>
         </>

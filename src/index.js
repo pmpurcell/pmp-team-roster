@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
-import { Router } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
 import firebase from 'firebase';
 import firebaseConfig from './api/apiKeys';
 import Initialize from './Initialize';
