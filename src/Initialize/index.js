@@ -19,7 +19,6 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
-        console.warn(user.uid);
         history.push('/teams');
       } else if (user || user === null) {
         setUser(false);

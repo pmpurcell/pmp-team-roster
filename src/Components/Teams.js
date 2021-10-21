@@ -1,11 +1,12 @@
-import { React, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import getPlayers from '../api/data/playerData';
 
 export default function Teams() {
+  const [playerRoster, setPlayerRoster] = useState([]);
   useEffect(() => {
     let isMounted = true;
     getPlayers().then((response) => {
-      if (isMounted) console.warn(response);
+      if (isMounted) setPlayerRoster(response);
     });
     return () => {
       isMounted = false;
@@ -15,14 +16,13 @@ export default function Teams() {
   return (
     <div>
       <div>
-        <h1>Teams</h1>
-        <div>
-          <img
-            src="https://yt3.ggpht.com/ytc/AKedOLTjvFHoG1VuV3C7tUKj4Pfc2hMI5YYgp3N89Py1YA=s900-c-k-c0x00ffffff-no-rj"
-            alt="basketball jones"
-          />
-          <h4>Basketball Jones</h4>
-        </div>
+        {playerRoster.map((player) => (
+          <div key={player.firebaseKey}>
+            <img src={player.imageUrl} alt={player.name} />
+            <h4>{player.name}</h4>
+            <p>Position:{player.position}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
