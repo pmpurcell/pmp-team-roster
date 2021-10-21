@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import getPlayers from '../api/data/playerData';
+import { getPlayers } from '../api/data/playerData';
 
 export default function Teams() {
   const [playerRoster, setPlayerRoster] = useState([]);
