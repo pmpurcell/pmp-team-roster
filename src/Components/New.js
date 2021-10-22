@@ -19,6 +19,7 @@ export default function New({ players, setPlayerRoster }) {
         name: players.name,
         imageUrl: players.imageUrl,
         position: players.position,
+        firebaseKey: players.firebaseKey,
       });
       console.warn(formInput);
     }
