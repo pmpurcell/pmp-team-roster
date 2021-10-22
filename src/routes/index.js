@@ -9,7 +9,7 @@ export default function Routes({ players, setPlayerRoster }) {
     <div>
       <Switch>
         <Route exact path="/teams" component={() => <Teams players={players} />} />
-        <Route exact path="/new" component={() => <New setPlayerRoster={setPlayerRoster} />} />
+        <Route exact path="/new" component={() => <New players={players} setPlayerRoster={setPlayerRoster} />} />
       </Switch>
     </div>
   );

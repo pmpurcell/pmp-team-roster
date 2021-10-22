@@ -10,17 +10,19 @@ const initialState = {
   position: '',
 };
 
-export default function New({ obj = {} || '', setPlayerRoster }) {
+export default function New({ players, setPlayerRoster }) {
   const history = useHistory();
   const [formInput, setFormInput] = useState(initialState);
   useEffect(() => {
-    setFormInput({
-      name: obj.name,
-      imageUrl: obj.imageUrl,
-      position: obj.position,
-    });
-    console.warn(formInput);
-  }, [obj]);
+    if (players.firebaseKey) {
+      setFormInput({
+        name: players.name,
+        imageUrl: players.imageUrl,
+        position: players.position,
+      });
+      console.warn(formInput);
+    }
+  }, [players]);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -31,7 +33,7 @@ export default function New({ obj = {} || '', setPlayerRoster }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    newPlayer(formInput).then((player) => { setPlayerRoster(player); });
+    newPlayer(formInput).then((newplayers) => { setPlayerRoster(newplayers); });
     history.push('/teams');
   };
   return (
@@ -53,10 +55,11 @@ export default function New({ obj = {} || '', setPlayerRoster }) {
 }
 
 New.propTypes = {
-  obj: PropTypes.shape({
+  players: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     imageUrl: PropTypes.string,
     position: PropTypes.string,
-  }).isRequired,
+    firebaseKey: PropTypes.string,
+  })).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
 };
