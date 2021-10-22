@@ -1,29 +1,28 @@
-import { React, useState, useEffect } from 'react';
-import { getPlayers } from '../api/data/playerData';
+import { React } from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function Teams() {
-  const [playerRoster, setPlayerRoster] = useState([]);
-  useEffect(() => {
-    let isMounted = true;
-    getPlayers().then((response) => {
-      if (isMounted) setPlayerRoster(response);
-    });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+export default function Teams({ players }) {
   return (
     <div>
       <div>
-        {playerRoster.map((player) => (
-          <div key={player.firebaseKey}>
-            <img src={player.imageUrl} alt={player.name} />
-            <h4>{player.name}</h4>
-            <p>Position:{player.position}</p>
+        {players.map((player) => (
+          <div className="card" style={{ width: 300 }} key={player.firebaseKey}>
+            <img
+              className="card-img-top"
+              src={player.imageUrl}
+              alt={player.name}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{player.name}</h5>
+              <p className="card-text">Position:{player.position}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
+Teams.propTypes = {
+  players: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
