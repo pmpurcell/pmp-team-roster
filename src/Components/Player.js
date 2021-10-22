@@ -6,6 +6,10 @@ export default function Player({ player, setPlayerRoster }) {
   const handleDelete = () => {
     deletePlayers(player.firebaseKey).then(setPlayerRoster);
   };
+
+  const handleEdit = () => {
+    console.warn(`Editing ${player.firebaseKey}`);
+  };
   return (
     <div>
       <div className="card" style={{ width: 300 }} key={player.firebaseKey}>
@@ -19,12 +23,16 @@ export default function Player({ player, setPlayerRoster }) {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" className="btn btn-success">
+          <button
+            type="button"
+            onClick={(e) => handleEdit(e)}
+            className="btn btn-success"
+          >
             Edit
           </button>
           <button
             type="button"
-            onClick={handleDelete}
+            onClick={(e) => handleDelete(e)}
             className="btn btn-danger"
           >
             Delete
