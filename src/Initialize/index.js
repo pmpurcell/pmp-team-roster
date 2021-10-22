@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 import SignIn from '../views/SignIn';
 import Nav from '../Components/Nav';
 import Routes from '../routes';
+import { getPlayers } from '../api/data/playerData';
 
 function Initialize() {
   const [user, setUser] = useState(null);
+  const [playerRoster, setPlayerRoster] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -19,6 +21,7 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
+        getPlayers().then(setPlayerRoster);
         history.push('/teams');
       } else if (user || user === null) {
         setUser(false);
@@ -31,10 +34,10 @@ function Initialize() {
       {user ? (
         <>
           <div className="App">
-            <h2>INSIDE APP COMPONENT</h2>
+            <h2>TEAM NAME</h2>
             <div>
               <Nav />
-              <Routes />
+              <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} />
             </div>
           </div>
         </>
