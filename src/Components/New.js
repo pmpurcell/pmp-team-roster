@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import { newPlayer } from '../api/data/playerData';
+import { newPlayer, updatePlayers } from '../api/data/playerData';
 
 const initialState = {
   name: '',
@@ -41,6 +41,7 @@ export default function New({ obj = {}, setPlayerRoster, setEditItem }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       console.warn('Player updated!');
+      updatePlayers(formInput).then((updatedplayers) => { setPlayerRoster(updatedplayers); });
       resetForm();
     } else {
       newPlayer(formInput).then((newplayers) => { setPlayerRoster(newplayers); });

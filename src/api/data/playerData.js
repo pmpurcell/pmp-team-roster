@@ -30,7 +30,7 @@ const deletePlayers = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const updatePlayers = (playerObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/players/${playerObj.firebaseKey}`, playerObj)
+  axios.patch(`${dbUrl}/players/${playerObj.firebaseKey}.json`, playerObj)
     .then(() => {
       getPlayers().then(resolve);
     })
