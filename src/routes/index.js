@@ -14,6 +14,7 @@ export default function Routes({
   return (
     <div>
       <Switch>
+        <Route exact path="/" component={() => <Teams players={players} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} userId={userId} />} />
         <Route exact path="/teams" component={() => <Teams players={players} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} userId={userId} />} />
         <Route exact path="/new" component={() => <New players={players} setPlayerRoster={setPlayerRoster} obj={editItem} setEditItem={setEditItem} userId={userId} />} />
       </Switch>
