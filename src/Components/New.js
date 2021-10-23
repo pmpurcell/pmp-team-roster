@@ -8,9 +8,15 @@ const initialState = {
   name: '',
   imageUrl: '',
   position: '',
+  uid: '',
 };
 
-export default function New({ obj = {}, setPlayerRoster, setEditItem }) {
+export default function New({
+  obj = {},
+  setPlayerRoster,
+  setEditItem,
+  userId,
+}) {
   const history = useHistory();
   const [formInput, setFormInput] = useState(initialState);
   useEffect(() => {
@@ -20,6 +26,7 @@ export default function New({ obj = {}, setPlayerRoster, setEditItem }) {
         imageUrl: obj.imageUrl,
         position: obj.position,
         firebaseKey: obj.firebaseKey,
+        uid: userId,
       });
       console.warn(obj);
     }
@@ -40,11 +47,10 @@ export default function New({ obj = {}, setPlayerRoster, setEditItem }) {
   const handleClick = (e) => {
     e.preventDefault();
     if (obj.firebaseKey) {
-      console.warn('Player updated!');
-      updatePlayers(formInput).then((updatedplayers) => { setPlayerRoster(updatedplayers); });
+      updatePlayers(formInput, userId).then((updatedplayers) => { setPlayerRoster(updatedplayers); });
       resetForm();
     } else {
-      newPlayer(formInput).then((newplayers) => { setPlayerRoster(newplayers); });
+      newPlayer({ ...formInput, uid: userId }, userId).then((newplayers) => { setPlayerRoster(newplayers); });
     }
     history.push('/teams');
   };
@@ -76,4 +82,5 @@ New.propTypes = {
   }).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };

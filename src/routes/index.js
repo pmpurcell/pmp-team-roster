@@ -9,12 +9,13 @@ export default function Routes({
   setPlayerRoster,
   setEditItem,
   editItem,
+  userId,
 }) {
   return (
     <div>
       <Switch>
-        <Route exact path="/teams" component={() => <Teams players={players} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} />} />
-        <Route exact path="/new" component={() => <New players={players} setPlayerRoster={setPlayerRoster} obj={editItem} setEditItem={setEditItem} />} />
+        <Route exact path="/teams" component={() => <Teams players={players} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} userId={userId} />} />
+        <Route exact path="/new" component={() => <New players={players} setPlayerRoster={setPlayerRoster} obj={editItem} setEditItem={setEditItem} userId={userId} />} />
       </Switch>
     </div>
   );
@@ -25,4 +26,5 @@ Routes.propTypes = {
   editItem: PropTypes.shape({}).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };
