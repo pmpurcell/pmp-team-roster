@@ -34,7 +34,7 @@ function Initialize() {
       {user ? (
         <>
           <div className="App">
-            <h2>TEAM NAME</h2>
+            <h2>Backyard Baseball</h2>
             <div>
               <Nav />
               <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} editItem={editItem} setEditItem={setEditItem} userId={user.uid} />
