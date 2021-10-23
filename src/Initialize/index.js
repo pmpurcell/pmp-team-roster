@@ -10,6 +10,7 @@ import { getPlayers } from '../api/data/playerData';
 function Initialize() {
   const [user, setUser] = useState(null);
   const [playerRoster, setPlayerRoster] = useState([]);
+  const [editItem, setEditItem] = useState({});
   const history = useHistory();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function Initialize() {
             <h2>TEAM NAME</h2>
             <div>
               <Nav />
-              <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} />
+              <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} editItem={editItem} setEditItem={setEditItem} />
             </div>
           </div>
         </>

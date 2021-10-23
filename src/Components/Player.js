@@ -1,15 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { deletePlayers } from '../api/data/playerData';
 
-export default function Player({ player, setPlayerRoster }) {
+export default function Player({ player, setPlayerRoster, setEditItem }) {
+  const history = useHistory();
   const handleDelete = () => {
     deletePlayers(player.firebaseKey).then(setPlayerRoster);
   };
 
   const handleEdit = () => {
-    console.warn(`Editing ${player.firebaseKey}`);
+    setEditItem(player);
+    history.push('/new');
   };
+
   return (
     <div>
       <div className="card" style={{ width: 300 }} key={player.firebaseKey}>
@@ -51,4 +55,5 @@ Player.propTypes = {
     firebaseKey: PropTypes.string,
   }).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
+  setEditItem: PropTypes.func.isRequired,
 };

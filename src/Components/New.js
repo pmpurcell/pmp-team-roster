@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-import { newPlayer } from '../api/data/playerData';
+import { newPlayer, updatePlayers } from '../api/data/playerData';
 
 const initialState = {
   name: '',
@@ -10,20 +10,20 @@ const initialState = {
   position: '',
 };
 
-export default function New({ players, setPlayerRoster }) {
+export default function New({ obj = {}, setPlayerRoster, setEditItem }) {
   const history = useHistory();
   const [formInput, setFormInput] = useState(initialState);
   useEffect(() => {
-    if (players.firebaseKey) {
+    if (obj.firebaseKey) {
       setFormInput({
-        name: players.name,
-        imageUrl: players.imageUrl,
-        position: players.position,
-        firebaseKey: players.firebaseKey,
+        name: obj.name,
+        imageUrl: obj.imageUrl,
+        position: obj.position,
+        firebaseKey: obj.firebaseKey,
       });
-      console.warn(formInput);
+      console.warn(obj);
     }
-  }, [players]);
+  }, [obj]);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -32,11 +32,23 @@ export default function New({ players, setPlayerRoster }) {
     }));
   };
 
+  const resetForm = () => {
+    setFormInput(initialState);
+    setEditItem({});
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
-    newPlayer(formInput).then((newplayers) => { setPlayerRoster(newplayers); });
+    if (obj.firebaseKey) {
+      console.warn('Player updated!');
+      updatePlayers(formInput).then((updatedplayers) => { setPlayerRoster(updatedplayers); });
+      resetForm();
+    } else {
+      newPlayer(formInput).then((newplayers) => { setPlayerRoster(newplayers); });
+    }
     history.push('/teams');
   };
+
   return (
     <div>
       <form id="playerForm">
@@ -56,11 +68,12 @@ export default function New({ players, setPlayerRoster }) {
 }
 
 New.propTypes = {
-  players: PropTypes.arrayOf(PropTypes.shape({
+  obj: PropTypes.shape({
     name: PropTypes.string,
     imageUrl: PropTypes.string,
     position: PropTypes.string,
     firebaseKey: PropTypes.string,
-  })).isRequired,
+  }).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
+  setEditItem: PropTypes.func.isRequired,
 };
