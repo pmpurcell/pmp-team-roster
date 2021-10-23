@@ -57,6 +57,7 @@ export default function New({
 
   return (
     <div>
+      <h1>New Player</h1>
       <form id="playerForm">
         <label htmlFor="name">
           <input name="name" id="name" value={formInput.name || ''} placeholder="Name" onChange={(e) => handleChange(e)} required />

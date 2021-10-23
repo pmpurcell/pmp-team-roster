@@ -10,9 +10,12 @@ export default function Teams({
 }) {
   return (
     <div>
-      {players.map((player) => (
-        <Player key={player.firebaseKey} player={player} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} userId={userId} />
-      ))}
+      <h1>Teams</h1>
+      <div id="playerDiv">
+        {players.map((player) => (
+          <Player key={player.firebaseKey} player={player} setPlayerRoster={setPlayerRoster} setEditItem={setEditItem} userId={userId} />
+        ))}
+      </div>
     </div>
   );
 }
