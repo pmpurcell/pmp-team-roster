@@ -3,10 +3,15 @@ import { PropTypes } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { deletePlayers } from '../api/data/playerData';
 
-export default function Player({ player, setPlayerRoster, setEditItem }) {
+export default function Player({
+  player,
+  setPlayerRoster,
+  setEditItem,
+  userId,
+}) {
   const history = useHistory();
   const handleDelete = () => {
-    deletePlayers(player.firebaseKey).then(setPlayerRoster);
+    deletePlayers(player.firebaseKey, userId).then(setPlayerRoster);
   };
 
   const handleEdit = () => {
@@ -56,4 +61,5 @@ Player.propTypes = {
   }).isRequired,
   setPlayerRoster: PropTypes.func.isRequired,
   setEditItem: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };

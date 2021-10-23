@@ -22,8 +22,7 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
-        getPlayers().then(setPlayerRoster);
-        history.push('/teams');
+        getPlayers(userInfoObj.uid).then(setPlayerRoster).then(history.push('/teams'));
       } else if (user || user === null) {
         setUser(false);
       }
@@ -38,7 +37,7 @@ function Initialize() {
             <h2>TEAM NAME</h2>
             <div>
               <Nav />
-              <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} editItem={editItem} setEditItem={setEditItem} />
+              <Routes players={playerRoster} setPlayerRoster={setPlayerRoster} editItem={editItem} setEditItem={setEditItem} userId={user.uid} />
             </div>
           </div>
         </>
