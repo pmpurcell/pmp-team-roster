@@ -52,7 +52,7 @@ export default function New({
     } else {
       newPlayer({ ...formInput, uid: userId }, userId).then((newplayers) => { setPlayerRoster(newplayers); });
     }
-    history.push('/teams');
+    history.push('/');
   };
 
   return (

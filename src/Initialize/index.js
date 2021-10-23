@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { useHistory } from 'react-router-dom';
 import SignIn from '../views/SignIn';
 import Nav from '../Components/Nav';
 import Routes from '../routes';
@@ -11,7 +10,6 @@ function Initialize() {
   const [user, setUser] = useState(null);
   const [playerRoster, setPlayerRoster] = useState([]);
   const [editItem, setEditItem] = useState({});
-  const history = useHistory();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -22,7 +20,7 @@ function Initialize() {
           uid: authed.uid,
         };
         setUser(userInfoObj);
-        getPlayers(userInfoObj.uid).then(setPlayerRoster).then(history.push('/teams'));
+        getPlayers(userInfoObj.uid).then(setPlayerRoster);
       } else if (user || user === null) {
         setUser(false);
       }
