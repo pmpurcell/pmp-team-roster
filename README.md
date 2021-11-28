@@ -22,7 +22,7 @@ The user can remove players from the roster.
 The user can edit player information.
 
 ## Video Walkthrough
-(View Video)[https://www.loom.com/share/c8ce268fcd4748bab396f8f2b7750439]
+[https://www.loom.com/share/c8ce268fcd4748bab396f8f2b7750439]
 
 
 ## Relevant Links <!-- Link to all the things that are required outside of the ones that have their own section -->
